@@ -1,0 +1,101 @@
+# Base image providing ROS 2 Jazzy with a desktop environment and VNC support
+FROM tiryoh/ros2-desktop-vnc:jazzy
+
+# ------------------------------------------------------------
+# Install essential development tools and utilities
+# ------------------------------------------------------------
+RUN apt update -y && apt install -y \
+    wget \        
+    git \         
+    nano \        
+    curl \       
+    git-lfs       
+
+# ------------------------------------------------------------
+# Visualization and simulation tools
+# ------------------------------------------------------------
+RUN apt update -y && apt install -y ros-jazzy-rviz2          
+RUN apt update -y && apt install -y ros-jazzy-ros-gz         
+
+# ------------------------------------------------------------
+# Universal Robots (UR) packages: description, drivers, and controllers
+# ------------------------------------------------------------
+RUN apt update -y && apt install -y \
+    ros-jazzy-ur-description \   
+    ros-jazzy-ur-robot-driver    
+
+RUN apt update -y && apt install -y ros-jazzy-ur-controllers 
+
+# ------------------------------------------------------------
+# ROS 2 control and Gazebo integration
+# ------------------------------------------------------------
+RUN apt update -y && apt install -y ros-jazzy-gz-ros2-control   
+RUN apt update -y && apt install -y ros-jazzy-ros2-control     
+RUN apt update -y && apt install -y ros-jazzy-ros2-controllers  
+
+# ------------------------------------------------------------
+# Joint state publishers (with and without GUI)
+# ------------------------------------------------------------
+RUN apt update -y && apt install -y \
+    ros-jazzy-joint-state-publisher \       
+    ros-jazzy-joint-state-publisher-gui     
+
+# ------------------------------------------------------------
+# Robot description utilities
+# ------------------------------------------------------------
+RUN apt update -y && apt install -y \
+    ros-jazzy-xacro \   
+    ros-jazzy-urdf     
+
+# ------------------------------------------------------------
+# MoveIt! dependencies for motion planning and manipulation
+# Includes planners, kinematics solvers, visualization, and hardware interfaces
+# ------------------------------------------------------------
+RUN apt update -y && apt install -y \
+    ros-jazzy-moveit-configs-utils \
+    ros-jazzy-moveit-kinematics \
+    ros-jazzy-moveit-planners \
+    ros-jazzy-moveit-planners-chomp \
+    ros-jazzy-moveit-ros-move-group \
+    ros-jazzy-moveit-ros-visualization \
+    ros-jazzy-moveit-servo \
+    ros-jazzy-moveit-simple-controller-manager \
+    ros-jazzy-warehouse-ros-sqlite \
+    ros-jazzy-ur-description \
+    ros-jazzy-xacro \
+    ros-jazzy-realsense2-camera \
+    ros-jazzy-realsense2-description \
+    ros-jazzy-ur-robot-driver \
+    ros-jazzy-robotiq-description \
+    ros-jazzy-robotiq-controllers \
+    ros-jazzy-pick-ik \
+    ros-jazzy-trac-ik
+
+# ------------------------------------------------------------
+# Computer vision integration
+# ------------------------------------------------------------
+RUN apt update -y && apt install -y ros-jazzy-cv-bridge   
+
+# ------------------------------------------------------------
+# Python dependencies for vision, ML, and robotics
+# ------------------------------------------------------------
+RUN apt update -y && apt install -y python3-opencv         
+RUN apt update -y && apt install -y python3-pip           
+RUN apt-get remove -y python3-scipy                       
+
+# Install Python packages with specific version constraints
+RUN python3 -m pip install "apriltag" --break-system-packages          
+RUN python3 -m pip install "scipy<1.12" --break-system-packages        
+RUN python3 -m pip install "torch" --break-system-packages             
+RUN python3 -m pip install "ultralytics" --break-system-packages      
+RUN python3 -m pip install "numpy<2.0" --force-reinstall --break-system-packages  
+RUN python3 -m pip install "joblib" --break-system-packages            
+RUN python3 -m pip install "scikit-learn" --break-system-packages      
+
+# ------------------------------------------------------------
+# Display configuration for GUI applications inside container
+# Ensures root user can access X server when DISPLAY is set
+# ------------------------------------------------------------
+RUN mkdir -p /home/ubuntu && \
+    touch /home/ubuntu/.bashrc && \
+    echo 'if [ -n "$DISPLAY" ]; then xhost +SI:localuser:root; fi' >> /home/ubuntu/.bashrc

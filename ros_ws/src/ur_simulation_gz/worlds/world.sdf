@@ -1,0 +1,151 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="default">
+
+    <!-- Plugin for simulating physics -->
+    <plugin
+      filename="gz-sim-physics-system"
+      name="gz::sim::systems::Physics">
+      <engine>
+        <filename>libgz-physics-bullet-featherstone-plugin.so</filename>
+      </engine>
+    </plugin>
+
+    <!-- Plugin for handling user commands -->
+    <plugin
+      filename="gz-sim-user-commands-system"
+      name="gz::sim::systems::UserCommands">
+    </plugin>
+
+    <!-- Plugin for broadcasting scene updates -->
+    <plugin
+      filename="gz-sim-scene-broadcaster-system"
+      name="gz::sim::systems::SceneBroadcaster">
+    </plugin>
+
+    <!-- Plugin for handling sensors like the LIDAR -->
+    <plugin
+      filename="gz-sim-sensors-system"
+      name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+
+    <!-- Plugin for IMU -->
+    <plugin filename="gz-sim-imu-system"
+      name="gz::sim::systems::Imu">
+    </plugin>
+
+    <!-- Gravity -->
+    <gravity>0.0 0.0 -9.8</gravity>
+
+    <light name="light_1" type="point">
+      <pose>0 0 2 0 0 0</pose> <!-- posizione x, y, z -->
+      <diffuse>1 1 1 1</diffuse> <!-- colore luce -->
+      <cast_shadows>false</cast_shadows>
+    </light>
+
+    <light name="light_2" type="point">
+      <pose>-0.6 0 2 0 0 0</pose>
+      <diffuse>1 1 0.8 1</diffuse>
+      <cast_shadows>false</cast_shadows>
+    </light>
+
+    <!-- Ground plane -->
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+            </plane>
+          </geometry>
+          <surface>
+            <friction>
+              <torsional>
+                <coefficient>0.0</coefficient>
+              </torsional>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+            <specular>0.8 0.8 0.8 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Table -->
+    <include>
+      <uri>
+        https://fuel.gazebosim.org/1.0/OpenRobotics/models/Table
+      </uri>
+      <pose>-0.3 0 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>
+        https://fuel.gazebosim.org/1.0/OpenRobotics/models/OfficeChairBlack
+      </uri>
+      <pose>-0.2 0.3 0 0 0 0</pose>
+    </include>
+<!-- 
+    <include>
+      <uri>
+        https://fuel.gazebosim.org/1.0/OpenRobotics/models/RoboCup 3D Simulation Ball
+      </uri>
+      <pose>-0.5 0.1 1.1 0 0 -1.57</pose>
+    </include>
+-->
+    <!-- Red cube target -->
+    <model name="red_cube">
+      <static>false</static>
+      <pose>-0.45 0 1.04 0 0 0</pose> 
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.05 0.05 0.05</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.05 0.05 0.05</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0 0 1</ambient>
+            <diffuse>1 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+          </material>
+        </visual>
+        <visual name="aruco_face">
+          <pose>0 0 0.0255 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://root/ros_workspace/src/ur_simulation_gz/description/apriltags/tag36_11_00000.dae</uri> 
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+      </link>
+    </model> 
+
+    <!-- Scene settings -->
+    <scene>
+      <shadows>false</shadows>
+    </scene>
+
+  </world>
+</sdf>
