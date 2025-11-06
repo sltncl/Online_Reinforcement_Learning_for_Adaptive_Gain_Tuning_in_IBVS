@@ -37,7 +37,7 @@ ros_ws/
       ├── ur_moveit_config/      # Official MoveIt configuration package for UR robots
       ├── ur_simulation_gz/      # Gazebo simulation package for UR robots
       ├── robotiq_description/   # Robotiq gripper description package
-      ├── utils/                 # Folder used to store trained ELM-PSO and RL networks, as well as log datasets
+      ├── utils/                 # Folder for trained ELM-PSO and RL networks, and log datasets
       └── picknik_accessories/   # Accessory packages for MoveIt (camera and adapter support)
 ```
 
@@ -86,10 +86,15 @@ Open your browser and navigate to:
 ```
 http://localhost:6080
 ```
-Then open a terminal (within the VNC interface) to access the container’s Visual Studio environment.
+Then open a terminal within the VNC interface to access the development environment (Visual Studio terminal).
 
-### 4. Build and Launch the ROS 2 Workspace
-Inside the container terminal:
+### 4. Access the Container and Launch the Simulation
+Open a **new terminal** on your host machine and connect to the running container:
+```bash
+./exec.sh
+```
+
+Then, **inside the container terminal**, run:
 ```bash
 source /opt/ros/jazzy/setup.bash
 export GZ_SIM_RESOURCE_PATH=${GZ_SIM_RESOURCE_PATH}:/root/ros_workspace/src/
@@ -99,8 +104,8 @@ source install/setup.bash
 ros2 launch ibvs_rl main.launch.py
 ```
 
-This command launches the full IBVS-RL simulation.  
-The visualization is rendered in **RViz**, directly accessible through the browser (via the VNC server).
+This will start the full IBVS-RL simulation.  
+The visualization will appear in **RViz**, directly accessible from the browser via the VNC interface.
 
 ---
 
@@ -109,11 +114,12 @@ The visualization is rendered in **RViz**, directly accessible through the brows
 The container uses the image `tiryoh/ros2-desktop-vnc:jazzy` to provide a browser-based development and visualization interface.  
 This setup ensures **cross-platform reproducibility** and avoids dependency conflicts across operating systems.
 
-If browser visualization is not desired, you can replace the base image in the Dockerfile with:
+If you prefer **not to use the VNC environment**, you can replace the base image in the Dockerfile with:
 ```
 ros:jazzy
 ```
-to enable native desktop rendering instead of VNC.
+However, **this alone is not sufficient**. The `run.sh` script must also be modified accordingly to properly expose graphics devices and display parameters.  
+These modifications depend on your system configuration (e.g., GPU type, graphics driver, operating system) and therefore are not detailed here.
 
 ---
 
