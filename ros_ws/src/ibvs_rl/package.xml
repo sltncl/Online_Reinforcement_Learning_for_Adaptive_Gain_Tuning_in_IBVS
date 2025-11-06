@@ -7,7 +7,6 @@
   <maintainer email="ubuntu@todo.todo">ubuntu</maintainer>
   <license>MIT</license>
 
-  <!-- Dipendenze di build e runtime -->
   <depend>launch</depend>
   <depend>launch_ros</depend>
   <depend>rclpy</depend>
@@ -18,7 +17,6 @@
   <depend>std_srvs</depend>
   <depend>cv_bridge</depend>
 
-  <!-- Test -->
   <test_depend>ament_copyright</test_depend>
   <test_depend>ament_flake8</test_depend>
   <test_depend>ament_pep257</test_depend>
