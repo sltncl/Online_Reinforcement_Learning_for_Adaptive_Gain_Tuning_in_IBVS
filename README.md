@@ -1,4 +1,4 @@
-# Online Reinforcement Learning for Adaptive Gain Tuning in Image-Based Visual Servoing (IBVS-RL)
+# Online Reinforcement Learning for Adaptive Gain Tuning in Image-Based Visual Servoing 
 
 This repository contains the implementation and simulation environment developed for the Master’s Thesis *“Online Reinforcement Learning for Adaptive Gain Tuning in Image-Based Visual Servoing”* at Politecnico di Bari, MSc in Automation Engineering (A.Y. 2024–2025).
 
@@ -119,7 +119,7 @@ If you prefer **not to use the VNC environment**, you can replace the base image
 ros:jazzy
 ```
 However, **this alone is not sufficient**. The `run.sh` script must also be modified accordingly to properly expose graphics devices and display parameters.  
-These modifications depend on your system configuration (e.g., GPU type, graphics driver, operating system) and therefore are not detailed here.
+These modifications depend on your system configuration (e.g., GPU type, graphics driver, operating system) and are therefore not detailed here.
 
 ---
 
@@ -132,6 +132,17 @@ It implements:
 - Integration with ROS 2 for real-time simulation and control.
 
 All other ROS packages serve as infrastructure to simulate the robot and sensors in Gazebo and MoveIt environments.
+
+---
+
+## 📄 Thesis and Documentation
+
+All theoretical background, design choices, and implementation details are thoroughly described in the Master’s Thesis document:
+
+📘 **Full Thesis PDF (Google Drive):**  
+[Online Reinforcement Learning for Adaptive Gain Tuning in Image-Based Visual Servoing](https://drive.google.com/file/d/139ezKAjrac02oMi4i4Ragl61CU84fFs2/view?usp=share_link)
+
+The thesis explains the reasoning behind the architecture, control strategies, learning algorithms, and experimental setup implemented in this repository.
 
 ---
 
