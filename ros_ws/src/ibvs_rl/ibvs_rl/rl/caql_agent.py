@@ -21,7 +21,7 @@ class CAQLAgent:
     Implements a hybrid reinforcement learning agent combining 
     **Q-learning with continuous actions** and optional **actor approximation**.  
     The agent alternates between:
-      - Genetic Algorithm (GA)-based exploration phase
+      - Gradient Ascent (GA)-based exploration phase
       - Policy (Actor)-based exploitation phase
 
     It supports asynchronous background training using a replay buffer 
