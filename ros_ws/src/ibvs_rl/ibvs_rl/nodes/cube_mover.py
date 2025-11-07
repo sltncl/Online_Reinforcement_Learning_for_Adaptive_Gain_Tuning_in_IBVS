@@ -26,7 +26,7 @@ class CubeMover(Node):
         self.center_y = 0.0         # Y-coordinate of circle center [m]
         self.z = 1.04               # Fixed Z height of the cube [m]
         self.angle = 0.0            # Current angular position [rad]
-        self.speed = 0.8            # Angular velocity [rad/s]
+        self.speed = 0.2            # Angular velocity [rad/s]
         self.timer_period = 0.2     # Timer callback period [s]
 
         # === Timer for periodic updates ===
