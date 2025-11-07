@@ -135,6 +135,16 @@ All other ROS packages serve as infrastructure to simulate the robot and sensors
 
 ---
 
+## 🎬 Video Tutorial
+
+A step-by-step tutorial on how to build and run the simulation environment is available on YouTube:
+
+👉 [Watch the setup video](https://youtu.be/LWE97ye5Ptg)
+
+This video explains how to correctly build and launch the Docker-based ROS 2 environment and how to start the IBVS-RL simulation through the VNC interface.
+
+---
+
 ## 📄 Thesis and Documentation
 
 All theoretical background, design choices, and implementation details are thoroughly described in the Master’s Thesis document:
