@@ -126,7 +126,7 @@ class IBVSNode(Node):
         self.save_dataset = self.get_parameter("dataset_saver").get_parameter_value().bool_value
         self.logger = DatasetLogger() if self.save_dataset else None
 
-        self.declare_parameter("eval_logger", True)
+        self.declare_parameter("eval_logger", False)
         self.save_eval = self.get_parameter("eval_logger").get_parameter_value().bool_value
         self.eval_logger = EvaluationLogger() if self.save_eval else None
 
